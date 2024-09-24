@@ -16,7 +16,7 @@
     "url": "https://github.com/Ryan-Ficklin/csc-307-app/issues"
   },
   "homepage": "https://github.com/Ryan-Ficklin/csc-307-app#readme",
-  "workspaces": {
+  "workspaces": [
     "packages/*"
-  }
+  ]
 }
