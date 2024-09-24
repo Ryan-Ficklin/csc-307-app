@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Ryan-Ficklin/csc-307-app#readme",
   "workspaces": {
-    "packages\*"
+    "packages/*"
   }
 }
