@@ -51,6 +51,12 @@ const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
 const addUser = (user) => {
+  //console.log(user);
+  // generates a random id, converts to a string, and takes off the "0." on 
+  // each id, for aesthetic purposes. This is a naive approach to generating 
+  // ids, and technically can result in collisions (though very unlikely)
+  // it'll do
+  user["id"] = Math.random().toString().slice(2); 
   users["users_list"].push(user);
   return user;
 };
@@ -93,9 +99,11 @@ app.get("/users/:id", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.status(201);
-  res.send();
+  // adds user to users["user_list"], and returns the newly added 
+  // user with a uniquely generated id
+  let new_user = addUser(userToAdd);
+  // indicated successful content creation and return new user
+  res.status(201).send(new_user);
 });
 
 app.delete("/users/:id", (req, res) => {

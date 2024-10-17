@@ -18,9 +18,9 @@ function MyApp() {
       .then((res) => {
         if (res.status != 201)
           throw new Error("No content created");
-        return res;
+        return res.json();
       })
-      .then(() => setCharacters([...characters, person]))
+      .then((updated_person) => setCharacters([...characters, updated_person]))
       .catch((error) => {
         console.log(error);
       });
