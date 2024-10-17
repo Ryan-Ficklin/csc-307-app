@@ -51,7 +51,6 @@ const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
 const addUser = (user) => {
-  //console.log(user);
   // generates a random id, converts to a string, and takes off the "0." on 
   // each id, for aesthetic purposes. This is a naive approach to generating 
   // ids, and technically can result in collisions (though very unlikely)

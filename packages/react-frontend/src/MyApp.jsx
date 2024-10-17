@@ -6,9 +6,16 @@ import Form from "./Form";
 function MyApp() {
   const [characters, setCharacters] = useState([]);
 
-  function removeOneCharacter(index) {
+  function removeOneCharacter(index) { 
+    let removed_id = null;
     const updated = characters.filter((character, i) => {
+      if (i === index) {
+        removed_id = character["id"];
+      }
       return i !== index;
+    });
+    const promise = fetch(`http://localhost:8000/users/${removed_id}`, {
+      method: "DELETE"
     });
     setCharacters(updated);
   }
@@ -32,7 +39,7 @@ function MyApp() {
   }
 
   function postUser(person) {
-    const promise = fetch("Http://localhost:8000/users", {
+    const promise = fetch("http://localhost:8000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
