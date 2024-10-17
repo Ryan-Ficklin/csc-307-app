@@ -16,14 +16,21 @@ function MyApp() {
     });
     const promise = fetch(`http://localhost:8000/users/${removed_id}`, {
       method: "DELETE"
+    }).then((res) => {
+      if (res.status === 404) {
+        throw new Error("Resource not found");
+      } else if (res.status === 204) {
+        setCharacters(updated);
+      }
+    }).catch((error) => {
+      console.log(error);
     });
-    setCharacters(updated);
   }
 
   function updateList(person) {
     postUser(person)
       .then((res) => {
-        if (res.status != 201)
+        if (res.status !== 201)
           throw new Error("No content created");
         return res.json();
       })

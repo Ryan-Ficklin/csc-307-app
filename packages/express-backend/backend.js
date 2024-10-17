@@ -60,8 +60,14 @@ const addUser = (user) => {
   return user;
 };
 
-const removeUser =
-  (user) => users["users_list"].splice(users["users_list"].indexOf(user), 1);
+const removeUser = (user) => {
+  let index = users["users_list"].indexOf(user);
+  if (index === -1)
+    return -1;
+  else
+    users["users_list"].splice(index, 1);
+    return 0;
+};
 
 app.use(cors());
 app.use(express.json());
@@ -107,7 +113,13 @@ app.post("/users", (req, res) => {
 
 app.delete("/users/:id", (req, res) => {
   const id = req.params["id"];
-  removeUser(findUserById(id));
+  let success = removeUser(findUserById(id));
+  if (success === 0){
+    res.status(204);
+  } else {
+    res.status(404);
+  }
+  res.send();
 });
 
 app.listen(port, () => {
